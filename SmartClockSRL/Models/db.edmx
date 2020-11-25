@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="smartclocksrldbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="checkin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeID" Type="int" />
+          <Property Name="checkDate" Type="date" />
+          <Property Name="checkHour" Type="varchar" MaxLength="40" />
+          <Property Name="observations" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="checkout">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employeeID" Type="int" />
+          <Property Name="checkDate" Type="date" />
+          <Property Name="checkHour" Type="varchar" MaxLength="40" />
+          <Property Name="observations" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="40" />
+          <Property Name="lastname" Type="varchar" MaxLength="40" />
+          <Property Name="address" Type="varchar" MaxLength="40" />
+          <Property Name="birthdate" Type="date" />
+          <Property Name="phone" Type="varchar" MaxLength="40" />
+          <Property Name="email" Type="varchar" MaxLength="40" />
+          <Property Name="huella" Type="varbinary(max)" />
+          <Property Name="admissionDate" Type="date" />
+          <Property Name="idPosition" Type="int" />
+          <Property Name="images" Type="varbinary(max)" />
+          <Property Name="gender" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="40" />
+          <Property Name="description" Type="varchar" MaxLength="225" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="40" />
+          <Property Name="creationdate" Type="date" />
+          <Property Name="description" Type="varchar" MaxLength="225" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="40" />
+          <Property Name="password" Type="varchar" MaxLength="40" />
+          <Property Name="idRol" Type="int" />
+        </EntityType>
+        <Association Name="FK__checkin__employe__30F848ED">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="checkin" Type="Self.checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="checkin">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkout__employ__49C3F6B7">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="checkout" Type="Self.checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="checkout">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__idPos__2B3F6F97">
+          <End Role="position" Type="Self.position" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="idPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__idRol__2E1BDC42">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="smartclocksrldbModelStoreContainer">
+          <EntitySet Name="checkin" EntityType="Self.checkin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="checkout" EntityType="Self.checkout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="position" EntityType="Self.position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__checkin__employe__30F848ED" Association="Self.FK__checkin__employe__30F848ED">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="checkin" EntitySet="checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkout__employ__49C3F6B7" Association="Self.FK__checkout__employ__49C3F6B7">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="checkout" EntitySet="checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__idPos__2B3F6F97" Association="Self.FK__employees__idPos__2B3F6F97">
+            <End Role="position" EntitySet="position" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__idRol__2E1BDC42" Association="Self.FK__users__idRol__2E1BDC42">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="smartclocksrldbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="checkin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeID" Type="Int32" />
+          <Property Name="checkDate" Type="DateTime" Precision="0" />
+          <Property Name="checkHour" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="observations" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__checkin__employe__30F848ED" FromRole="checkin" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="checkout">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeID" Type="Int32" />
+          <Property Name="checkDate" Type="DateTime" Precision="0" />
+          <Property Name="checkHour" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="observations" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__checkout__employ__49C3F6B7" FromRole="checkout" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="birthdate" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="admissionDate" Type="DateTime" Precision="0" />
+          <Property Name="idPosition" Type="Int32" />
+          <Property Name="images" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="checkin" Relationship="Self.FK__checkin__employe__30F848ED" FromRole="employees" ToRole="checkin" />
+          <NavigationProperty Name="checkout" Relationship="Self.FK__checkout__employ__49C3F6B7" FromRole="employees" ToRole="checkout" />
+          <NavigationProperty Name="position" Relationship="Self.FK__employees__idPos__2B3F6F97" FromRole="employees" ToRole="position" />
+        </EntityType>
+        <EntityType Name="position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="employees" Relationship="Self.FK__employees__idPos__2B3F6F97" FromRole="position" ToRole="employees" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="creationdate" Type="DateTime" Precision="0" />
+          <Property Name="description" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__idRol__2E1BDC42" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="idRol" Type="Int32" />
+          <NavigationProperty Name="roles" Relationship="Self.FK__users__idRol__2E1BDC42" FromRole="users" ToRole="roles" />
+        </EntityType>
+        <Association Name="FK__checkin__employe__30F848ED">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="checkin" Type="Self.checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="checkin">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkout__employ__49C3F6B7">
+          <End Role="employees" Type="Self.employees" Multiplicity="0..1" />
+          <End Role="checkout" Type="Self.checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employees">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="checkout">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employees__idPos__2B3F6F97">
+          <End Role="position" Type="Self.position" Multiplicity="0..1" />
+          <End Role="employees" Type="Self.employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employees">
+              <PropertyRef Name="idPosition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__idRol__2E1BDC42">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="smartclocksrldbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="checkin" EntityType="Self.checkin" />
+          <EntitySet Name="checkout" EntityType="Self.checkout" />
+          <EntitySet Name="employees" EntityType="Self.employees" />
+          <EntitySet Name="position" EntityType="Self.position" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK__checkin__employe__30F848ED" Association="Self.FK__checkin__employe__30F848ED">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="checkin" EntitySet="checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkout__employ__49C3F6B7" Association="Self.FK__checkout__employ__49C3F6B7">
+            <End Role="employees" EntitySet="employees" />
+            <End Role="checkout" EntitySet="checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employees__idPos__2B3F6F97" Association="Self.FK__employees__idPos__2B3F6F97">
+            <End Role="position" EntitySet="position" />
+            <End Role="employees" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__idRol__2E1BDC42" Association="Self.FK__users__idRol__2E1BDC42">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="smartclocksrldbModelStoreContainer" CdmEntityContainer="smartclocksrldbEntities">
+          <EntitySetMapping Name="checkin">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.checkin">
+              <MappingFragment StoreEntitySet="checkin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+                <ScalarProperty Name="checkHour" ColumnName="checkHour" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="checkout">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.checkout">
+              <MappingFragment StoreEntitySet="checkout">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="checkDate" ColumnName="checkDate" />
+                <ScalarProperty Name="checkHour" ColumnName="checkHour" />
+                <ScalarProperty Name="observations" ColumnName="observations" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.employees">
+              <MappingFragment StoreEntitySet="employees">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="huella" ColumnName="huella" />
+                <ScalarProperty Name="admissionDate" ColumnName="admissionDate" />
+                <ScalarProperty Name="idPosition" ColumnName="idPosition" />
+                <ScalarProperty Name="images" ColumnName="images" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="position">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.position">
+              <MappingFragment StoreEntitySet="position">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="creationdate" ColumnName="creationdate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="smartclocksrldbModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

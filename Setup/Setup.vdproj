@@ -184,6 +184,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -507,15 +515,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
-        "ProductCode" = "8:{623C8635-D1B7-4C9C-B313-C955CDA16A76}"
-        "PackageCode" = "8:{508235EC-C66E-4932-87EA-144F47586FE9}"
+        "ProductCode" = "8:{046C5984-E3BC-4BF9-900E-1419A25C3AB5}"
+        "PackageCode" = "8:{0076980D-08E1-46E1-A229-3DD951640976}"
         "UpgradeCode" = "8:{EA069231-351E-4D44-8E0C-2C8791CFE86A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:SmartClockSRL"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

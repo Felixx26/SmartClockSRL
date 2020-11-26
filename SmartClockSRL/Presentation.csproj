@@ -228,6 +228,7 @@
       <DependentUpon>db.edmx</DependentUpon>
       <LastGenOutput>db.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\photo5039694383401773283.jpg" />
     <None Include="Resources\formar-una-empresa.jpg" />
     <None Include="Resources\lupa.png" />
     <None Include="Resources\270px-Coat_of_arms_of_the_Dominican_Republic.svg.png" />
